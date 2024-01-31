@@ -1,2 +1,3 @@
-# ft_IRC
-IRC 42
+# FT_IRC
+## Creating an IRC server from scratch
+
