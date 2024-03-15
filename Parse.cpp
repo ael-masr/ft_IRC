@@ -176,7 +176,6 @@ void    handleCapCommand(std::vector<std::string> &parameters,User &currentUser)
         //to be implemented
     }
 }
-/*###################################################################*/
 
 void parse(User &currentUser)
 {
