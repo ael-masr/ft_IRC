@@ -108,11 +108,11 @@ bool	Channel::channel_exists(Channel channel)
  * @param channel string to be checked
  * @return true if channel exists, false otherwise
 */
-bool	channel_exists(string channel)
+bool	Channel::channel_exists(string channel)
 {
 	for (size_t i = 0; i < Server::channels_.size(); i++)
 	{
-		if (Server::channels_[i].get_channel_name() == channel)
+		if (Server::channels_[i].channel_name_ == channel)
 			return true;
 	}
 	return false;
@@ -146,6 +146,57 @@ int		Channel::find_user(vector<User> users, string user)
 			return i;
 	}
 	return -1;
+}
+
+/**
+ * @brief 
+ * 
+ * @param fd 
+ * @return vector<User>::iterator 
+ */
+vector<User>::iterator	Channel::user_index(int fd)
+{
+	this->user_it = this->users_.begin();
+	for (; this->user_it != this->users_.end(); this->user_it++)
+	{
+		if (this->user_it->getFd() == fd)
+			return this->user_it;
+	}
+	return this->user_it;
+}
+
+/**
+ * @brief 
+ * 
+ * @param fd 
+ * @return vector<User>::iterator 
+ */
+vector<User>::iterator	Channel::operator_index(int fd)
+{
+	this->operator_it = this->get_operator_list().begin();
+	for (; this->operator_it != this->get_operator_list().end(); this->operator_it++)
+	{
+		if (this->operator_it->getFd() == fd)
+			return this->operator_it;
+	}
+	return this->operator_it;
+}
+
+/**
+ * @brief 
+ * 
+ * @param fd 
+ * @return vector<User>::iterator 
+ */
+vector<User>::iterator	Channel::invite_index(int fd)
+{
+	this->invite_it = this->get_invite_list().begin();
+	for (; this->invite_it != this->get_operator_list().end(); this->invite_it++)
+	{
+		if (this->invite_it->getFd() == fd)
+			return this->invite_it;
+	}
+	return this->invite_it;
 }
 
 /** @brief Add a user to a channel
